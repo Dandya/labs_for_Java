@@ -76,5 +76,6 @@ public class myList <Type> {
     public void deleteAll(){
         firstElement = null;
         lastElement = null;
+        
     }
 }
