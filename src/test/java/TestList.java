@@ -8,8 +8,10 @@ public class TestList {
     void constructorsAndSize() {
         myList<Integer> list1 = new myList<>();
         myList<Integer> list2 = new myList<>(10);
+        myList<Integer> list3 = new myList<>(10, 12, 21);
         assertEquals(0, list1.size());
         assertEquals(1, list2.size());
+        assertEquals(3, list3.size());
     }
 
     @Test
@@ -53,6 +55,12 @@ public class TestList {
     @Test
     void deleteFirstElm(){
         myList<Integer> list = new myList<>();
+        try{
+            list.deleleFirstElm();
+        }
+        catch (UnsupportedOperationException e){
+            assertTrue(true);
+        }
         for(int i = -100; i < 100; i++){
             list.push(i);
         }
@@ -68,6 +76,14 @@ public class TestList {
         list.deleteByValue(0);
         assertEquals(1, list.get(100));
         assertEquals(-1, list.get(99));
+        list.deleteByValue(-100);
+        assertEquals(-99, list.get(0));
+        list.deleteByValue(99);
+        try{
+            assertNotEquals(99, list.get(199));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            assertTrue(true);
+        }
         try{
             list.deleteByValue(300);
         } catch (IllegalArgumentException e) {

@@ -20,19 +20,26 @@ public class myList <Type> {
     public myList(Type value) {
         firstElement = new Element<Type>(value);
         lastElement = firstElement;
-        size++;
+        this.size++;
+    }
+    public myList(Type ... vars) {
+        for(Type value: vars){
+            this.push(value);
+        }
     }
     public long size(){
-        return size;
+        return this.size;
     }
     private Element<Type> getElm(long index) {
         Element<Type> tmpElement = firstElement;
+        if(index >= this.size)
+            return null;
         while(index-- > 0)
             tmpElement = tmpElement.nextElement;
         return tmpElement;
     }
     public Type get(long index) throws ArrayIndexOutOfBoundsException {
-        if(index < 0 || index >= size)
+        if(index < 0 || index >= this.size)
             throw new ArrayIndexOutOfBoundsException(String.format("Element with %d don't exist", index));
         return getElm(index).value;
     }
@@ -40,34 +47,39 @@ public class myList <Type> {
         if(firstElement == null){
             firstElement = new Element<Type>(value);
             lastElement = firstElement;
-            size++;
+            this.size++;
             return;
         }
         lastElement.nextElement = new Element<>();
         lastElement = lastElement.nextElement;
         lastElement.value = value;
-        size++;
+        this.size++;
     }
     public void pushToBegin(Type value) {
         Element<Type> tmpElement = firstElement;
         firstElement = new Element<Type>(value);
         firstElement.nextElement = tmpElement;
-        size++;
+        this.size++;
     }
     public Type deleleFirstElm() throws UnsupportedOperationException {
         if(firstElement == null)
             throw new UnsupportedOperationException("First element don't exist");
         Type tmp = firstElement.value;
         firstElement = firstElement.nextElement;
-        size--;
+        this.size--;
         return tmp;
     }
     public void deleteByValue(Type value) throws IllegalArgumentException{
         boolean isDeleted = false;
-        for(int i = 0; i < this.size; i++){
+        for(long i = 0; i < this.size; i++){
             if(this.get(i).equals(value)){
+                if(i == 0){
+                    deleleFirstElm();
+                    return;
+                }
                 this.getElm(i-1).nextElement = this.getElm(i+1);
                 isDeleted = true;
+                this.size--;
             }
         }
         if(!isDeleted)
@@ -76,6 +88,6 @@ public class myList <Type> {
     public void deleteAll(){
         firstElement = null;
         lastElement = null;
-        
+        this.size = 0;
     }
 }
