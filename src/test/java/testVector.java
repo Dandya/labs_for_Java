@@ -1,7 +1,5 @@
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class testVector {
@@ -41,15 +39,25 @@ public class testVector {
     @Test
     void insert(){
         myVector<Integer> dynamicArr = new myVector<>(10);
+        // test 1
         for(int i = 0; i < 10; i++)
             dynamicArr.insert(i, i);
         assertEquals(4, dynamicArr.get(4));
-        try{ assertEquals(1, dynamicArr.get(10)); }
+        assertEquals(10, dynamicArr.getLength());
+        // test 2
+        try{ dynamicArr.insert(10, 10); }
         catch (ArrayIndexOutOfBoundsException e){ assertTrue(true); }
-        dynamicArr.push(10);
-        assertEquals(10, dynamicArr.get(10));
-        dynamicArr.insert(11, 10);
-        assertEquals(11, dynamicArr.get(10));
+        // test 3
+        dynamicArr.insert(-1,0);
+        assertEquals(-1, dynamicArr.get(0));
+        assertEquals(0, dynamicArr.get(1));
+        assertEquals(11, dynamicArr.getLength());
+        // test 4
+        assertEquals(5, dynamicArr.get(6));
+        dynamicArr.insert(-5, 6);
+        assertEquals(-5, dynamicArr.get(6));
+        assertEquals(5, dynamicArr.get(7));
+        assertEquals(12, dynamicArr.getLength());
     }
     @Test
     void delete(){

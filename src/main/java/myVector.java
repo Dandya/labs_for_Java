@@ -34,9 +34,8 @@ public class myVector<Type> {
         return newArray;
     }
     public void push(Type value){
-        if(this.length == this.maxLength){
+        if(this.length == this.maxLength)
             this.array = realloc(array, maxLength*2+10);
-        }
         this.array[this.length++] = value;
     }
     public Type get(int index) throws ArrayIndexOutOfBoundsException{
@@ -46,9 +45,22 @@ public class myVector<Type> {
             throw new ArrayIndexOutOfBoundsException();
     }
     public void insert(Type value, int index) throws ArrayIndexOutOfBoundsException{
-        if(index < this.length && index >= 0)
-            this.array[index] = value;
+        if(index < this.length && index >= 0){
+            if(this.array[index] == null){
+                this.array[index] = value;
+            }
+            else{
+                if(this.length == this.maxLength)
+                    this.array = realloc(array, maxLength*2+10);
+                for(int i = this.length; i > index; i--)
+                    this.array[i] = this.array[i-1];
+                this.array[index] = value;
+                this.length++;
+            }
 
+        }
+        else
+            throw new ArrayIndexOutOfBoundsException();
     }
     public void delete(int index) throws ArrayIndexOutOfBoundsException{
         if(index < this.length && index >= 0){

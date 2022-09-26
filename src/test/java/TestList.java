@@ -103,4 +103,9 @@ public class TestList {
             assertTrue(true);
         }
     }
+    @Test
+    void toStr(){
+        myList<String> list = new myList<>("Hello", " World!");
+        assertEquals("[Hello, World!]", list.toString());
+    }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * class myList
  * @param <Type>
  */
-public class myList <Type> {
+public class myList <Type>{
     private static class Element <Type> {
         public Type value;
         public Element<Type> nextElement;
@@ -15,7 +15,7 @@ public class myList <Type> {
     }
     private Element <Type> firstElement;
     private Element <Type> lastElement;
-    private long size = 0;
+    private int size = 0;
     public myList() {}
     public myList(Type value) {
         firstElement = new Element<Type>(value);
@@ -27,10 +27,10 @@ public class myList <Type> {
             this.push(value);
         }
     }
-    public long size(){
+    public int size(){
         return this.size;
     }
-    private Element<Type> getElm(long index) {
+    private Element<Type> getElm(int index) {
         Element<Type> tmpElement = firstElement;
         if(index >= this.size)
             return null;
@@ -38,7 +38,7 @@ public class myList <Type> {
             tmpElement = tmpElement.nextElement;
         return tmpElement;
     }
-    public Type get(long index) throws ArrayIndexOutOfBoundsException {
+    public Type get(int index) throws ArrayIndexOutOfBoundsException {
         if(index < 0 || index >= this.size)
             throw new ArrayIndexOutOfBoundsException(String.format("Element with %d don't exist", index));
         return getElm(index).value;
@@ -71,7 +71,7 @@ public class myList <Type> {
     }
     public void deleteByValue(Type value) throws IllegalArgumentException{
         boolean isDeleted = false;
-        for(long i = 0; i < this.size; i++){
+        for(int i = 0; i < this.size; i++){
             if(this.get(i).equals(value)){
                 if(i == 0){
                     deleleFirstElm();
@@ -89,5 +89,15 @@ public class myList <Type> {
         firstElement = null;
         lastElement = null;
         this.size = 0;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder("[");
+        for(int i = 0; i < this.size-1; i++){
+            str.append(this.get(i).toString()).append(",");
+        }
+        str.append(this.get(this.size-1).toString()).append("]");
+        return str.toString();
     }
 }
