@@ -83,5 +83,5 @@ public class Complex{
         df.setGroupingUsed(false);
         return String.format("%s + (%s)i", df.format(this.real), df.format(this.imag));
     }
-
+    //TODO: Equals and HashCode
 }

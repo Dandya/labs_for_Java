@@ -78,4 +78,5 @@ public class myVector<Type> {
     public void deleteAll(){
         this.length = 0;
     }
+    //TODO: Equals and HashCode
 }

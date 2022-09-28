@@ -100,4 +100,5 @@ public class myList <Type>{
         str.append(this.get(this.size-1).toString()).append("]");
         return str.toString();
     }
+    //TODO: Equals and HashCode
 }

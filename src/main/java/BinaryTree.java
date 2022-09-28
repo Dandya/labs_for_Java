@@ -25,25 +25,67 @@ public class BinaryTree <Type extends Comparable> {
         for(int i = 1; i < vars.length; i++)
             this.insert(vars[i]);
     }
-    // TODO: change while on if!
-    public void insert(Type value) throws IllegalArgumentException{
-        if(value == null)
-            throw new IllegalArgumentException();
+    public boolean search(@NotNull Type value){
+        if(getNode(value) != null)
+            return true;
+        else
+            return false;
+    }
+    public void insert(@NotNull Type value){
         Node<Type> node = createNode(value);
-        changeHeight(node);
-        while(!isBalancedTree(node))
-            balanceTree(node);
+        if(node != this.root){
+            changeSubTree(node);
+        }
+    }
+    public boolean isBalancedTree(){
+        ArrayList<Node<Type>> list = symmetricOrder(this.root);
+        for(Node<Type> node: list) {
+            if (Math.abs(((node.leftNode != null) ? node.leftNode.height : 0) -
+                    ((node.rightNode != null) ? node.rightNode.height : 0)) < 2) {
+                continue;
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
     public ArrayList<Type> symmetricOrderArray(){
         ArrayList<Node<Type>> list = symmetricOrder(this.root);
         ArrayList<Type> result = new ArrayList<>();
-        for(int i = 0; i < list.size(); i++){
-            result.add(list.get(i).value);
+        for (Node<Type> node : list) {
+            result.add(node.value);
         }
         return result;
     }
+    public void deleteValue(@NotNull Type value){
+        Node<Type> node = getNode(value);
+        if(node.parentNode != null) {
+            if(node.parentNode.leftNode == node)
+                node.parentNode.leftNode = null;
+            else
+                node.parentNode.rightNode = null;
+        }
+        else
+            this.root = new Node<>(null);
+        node.parentNode = null;
+        ArrayList<Node<Type>> nodes = symmetricOrder(node);
+        nodes.remove(node);
+        for(Node<Type> val : nodes)
+            this.insert(val.value);
+    }
+    public void deleteAll(){
+        this.root = new Node<>(null);
+    }
+    public int getHeight(@NotNull  Type value){
+        return getNode(value).height;
+    }
+    //TODO: Equals and HashCode
     private Node<Type> createNode(Type value){
         Node<Type> parentNode = this.root;
+        if(this.root.value == null){
+            this.root.value = value;
+            return this.root;
+        }
         Node<Type> newNode = null;
         while(newNode == null){
             switch(value.compareTo(parentNode.value)){
@@ -83,20 +125,19 @@ public class BinaryTree <Type extends Comparable> {
         }
         return newNode;
     }
-    private void changeHeight(Node<Type> node){
-        node.height = 1 + Math.max((node.leftNode != null)? node.leftNode.height : 0 ,
-                (node.rightNode != null)? node.rightNode.height :  0);
-        if(node.parentNode != null)
-            changeHeight(node.parentNode);
-    }
-    private boolean isBalancedTree(Node<Type> node){
+    private void changeSubTree(Node<Type> node){
         if(node == null)
-            return true;
+            return;
         if(Math.abs(((node.leftNode != null)? node.leftNode.height : 0 ) -
-                ((node.rightNode != null)? node.rightNode.height :  0)) < 2)
-            return isBalancedTree(node.parentNode);
-        else
-            return false;
+                ((node.rightNode != null)? node.rightNode.height :  0)) < 2){
+            node.height = 1 + Math.max((node.leftNode != null)? node.leftNode.height : 0 ,
+                    (node.rightNode != null)? node.rightNode.height :  0);
+            changeSubTree(node.parentNode);
+        }
+        else{
+            node = balanceTree(node);
+            changeSubTree(node);
+        }
     }
     private ArrayList<Node<Type>> symmetricOrder(Node<Type> root){
         ArrayList<Node<Type>> list = new ArrayList<>();
@@ -110,7 +151,6 @@ public class BinaryTree <Type extends Comparable> {
         list.add(root);
         addToListSO(root.rightNode, list);
     }
-    // TODO: change ArrayList to List
     private Node<Type> buildTree(List<Node<Type>> list){
         if(list.equals(EMPTY_LIST))
             return null;
@@ -129,8 +169,8 @@ public class BinaryTree <Type extends Comparable> {
     /**
      * @param node is sheet which consist in unbalanced tree
      */
-    private void balanceTree(Node<Type> node){
-        Node<Type> root = node.parentNode;
+    private Node<Type> balanceTree(Node<Type> node){
+        Node<Type> root = node;
         while(Math.abs(((root.leftNode != null)? root.leftNode.height : 0 ) -
                 ((root.rightNode != null)? root.rightNode.height :  0)) < 2)
             root = root.parentNode;
@@ -146,26 +186,27 @@ public class BinaryTree <Type extends Comparable> {
         } else
             this.root = root;
         root.parentNode = parentOfRoot;
-        changeHeight(root);
+        return root;
     }
-
-    public boolean search(Type value){
-        Node<Type> parentNode = this.root;
-        while(parentNode != null){
-            switch(value.compareTo(parentNode.value)){
+    private Node<Type> getNode(Type value){
+        Node<Type> node = this.root;
+        if(this.root.value == null)
+            return null;
+        while(node != null){
+            switch(value.compareTo(node.value)){
                 case -1:{
-                    parentNode = parentNode.leftNode;
+                    node = node.leftNode;
                     break;
                 }
                 case 1: {
-                    parentNode = parentNode.rightNode;
+                    node = node.rightNode;
                     break;
                 }
                 case 0:{
-                    return true;
+                    return node;
                 }
             }
         }
-        return false;
+        return null;
     }
 }
