@@ -1,35 +1,41 @@
 import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestComplex {
 
     @Test
     void constructorsEqualsAndValueOf(){
-        Complex a = new Complex();
-        Complex b = new Complex(0, 0);
-        Complex c = Complex.valueOf(0,0);
+        Complex<Comparable> a = new Complex<Comparable>();
+        Complex<Comparable> b = new Complex<Comparable>(0, 0);
+        Complex<Comparable> c = Complex.valueOf(0,0);
         assertEquals(0, a.getReal().compareTo(b.getReal()));
         assertEquals(0, a.getImag().compareTo(b.getImag()));
         assertTrue(a.equals(c));
+        assertEquals(a.hashCode(), c.hashCode());
+        a = a.add(new Complex<Comparable>(20,0));
+        c = c.add(new Complex<Comparable>(20,0));
+        assertTrue(a.equals(c));
+        assertFalse(a.equals(new String("1")));
+        c = c.sub(new Complex<Comparable>(1e-10, 0));
+        assertFalse(a.equals(c));
+        assertNotEquals(a.hashCode(), c.hashCode());
     }
 
     @Test
     void add() {
-        Complex a = new Complex(1, 1.8);
-        Complex b = new Complex(2.5, -1.8);
-        Complex c = new Complex(3.5, 0);
+        Complex<Comparable> a = new Complex<Comparable>(1, 1.8);
+        Complex<Comparable> b = new Complex<Comparable>(2.5, -1.8);
+        Complex<Comparable> c = new Complex<Comparable>(3.5, 0);
         assertTrue(c.getReal().subtract(a.add(b).getReal()).abs().compareTo(BigDecimal.valueOf(1E-5)) < 0);
         assertTrue(c.getImag().subtract(a.add(b).getImag()).abs().compareTo(BigDecimal.valueOf(1E-5)) < 0);
     }
 
     @Test
     void subtract() {
-        Complex a = new Complex(1, 1.8);
-        Complex b = new Complex(2.5, -1.8);
-        Complex c = new Complex(-1.5, 3.6);
+        Complex<Comparable> a = new Complex<Comparable>(1, 1.8);
+        Complex<Comparable> b = new Complex<Comparable>(2.5, -1.8);
+        Complex<Comparable> c = new Complex<Comparable>(-1.5, 3.6);
         assertTrue(c.getReal().subtract(a.sub(b).getReal()).abs().compareTo(BigDecimal.valueOf(1E-5)) < 0);
         assertTrue(c.getImag().subtract(a.sub(b).getImag()).abs().compareTo(BigDecimal.valueOf(1E-5)) < 0);
     }

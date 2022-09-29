@@ -1,55 +1,76 @@
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-public class BinaryTree <Type extends Comparable> {
+
+public class BinaryTree<Type extends Comparable> {
+
     private class Node<Type> {
         public Type value;
         public int height = 0;
         public Node<Type> rightNode = null;
         public Node<Type> leftNode = null;
         public Node<Type> parentNode = null;
-        public Node(Type value){ this.value = value;}
+
+        public Node(Type value) {
+            this.value = value;
+        }
+
         @Override
-        public String toString(){return value.toString();}
+        public String toString() {
+            return value.toString();
+        }
 
     }
+
     private Node<Type> root = new Node<>(null);
-    private final List<Object> EMPTY_LIST = new ArrayList<>().subList(0,0);
-    public BinaryTree(){
+    private int countNodes = 0;
+    private final List<Object> EMPTY_LIST = new ArrayList<>().subList(0, 0);
+
+    public BinaryTree() {
     }
-    public BinaryTree(Type value){
+
+    public BinaryTree(Type value) {
         this.root.value = value;
+        this.countNodes++;
     }
-    public BinaryTree(Type @NotNull ... vars){
+
+    @SafeVarargs
+    public BinaryTree(Type @NotNull ... vars) {
         this.root.value = vars[0];
-        for(int i = 1; i < vars.length; i++)
+        this.countNodes++;
+        for (int i = 1; i < vars.length; i++) {
             this.insert(vars[i]);
+        }
     }
-    public boolean search(@NotNull Type value){
-        if(getNode(value) != null)
-            return true;
-        else
-            return false;
+
+    public int getCountNodes(){
+        return this.countNodes;
     }
-    public void insert(@NotNull Type value){
+
+    public boolean search(@NotNull Type value) {
+        return getNode(value) != null;
+    }
+
+    public void insert(@NotNull Type value) {
         Node<Type> node = createNode(value);
-        if(node != this.root){
+        this.countNodes++;
+        if (node != this.root) {
             changeSubTree(node);
         }
     }
-    public boolean isBalancedTree(){
+
+    public boolean isBalancedTree() {
         ArrayList<Node<Type>> list = symmetricOrder(this.root);
-        for(Node<Type> node: list) {
+        for (Node<Type> node : list) {
             if (Math.abs(((node.leftNode != null) ? node.leftNode.height : 0) -
-                    ((node.rightNode != null) ? node.rightNode.height : 0)) < 2) {
-                continue;
-            } else {
+                    ((node.rightNode != null) ? node.rightNode.height : 0)) >= 2) {
                 return false;
             }
         }
         return true;
     }
-    public ArrayList<Type> symmetricOrderArray(){
+
+    public ArrayList<Type> symmetricOrderArray() {
         ArrayList<Node<Type>> list = symmetricOrder(this.root);
         ArrayList<Type> result = new ArrayList<>();
         for (Node<Type> node : list) {
@@ -57,29 +78,95 @@ public class BinaryTree <Type extends Comparable> {
         }
         return result;
     }
-    public void deleteValue(@NotNull Type value){
-        Node<Type> node = getNode(value);
-        if(node.parentNode != null) {
-            if(node.parentNode.leftNode == node)
-                node.parentNode.leftNode = null;
-            else
-                node.parentNode.rightNode = null;
+
+    public ArrayList<Type> forwardOrderArray() {
+        ArrayList<Node<Type>> list = forwardOrder(this.root);
+        ArrayList<Type> result = new ArrayList<>();
+        for (Node<Type> node : list) {
+            result.add(node.value);
         }
-        else
+        return result;
+    }
+
+    public void deleteValue(@NotNull Type value) {
+        Node<Type> node = getNode(value);
+        if (node.parentNode != null) {
+            if (node.parentNode.leftNode == node) {
+                node.parentNode.leftNode = null;
+            } else {
+                node.parentNode.rightNode = null;
+            }
+        } else {
             this.root = new Node<>(null);
+        }
         node.parentNode = null;
         ArrayList<Node<Type>> nodes = symmetricOrder(node);
+        this.countNodes -= nodes.size();
         nodes.remove(node);
-        for(Node<Type> val : nodes)
+        for (Node<Type> val : nodes) {
             this.insert(val.value);
+        }
     }
-    public void deleteAll(){
+
+    public void deleteAll() {
         this.root = new Node<>(null);
+        this.countNodes = 0;
     }
-    public int getHeight(@NotNull  Type value){
-        return getNode(value).height;
+
+    public int getHeight(@NotNull Type value) throws IllegalArgumentException {
+        if (getNode(value) != null) {
+            return getNode(value).height;
+        }
+        throw new IllegalArgumentException();
     }
-    //TODO: Equals and HashCode
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        if (this.root.value != null) {
+            addToStrFO(this.root, str);
+            return str.toString();
+        } else {
+            return "";
+        }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof BinaryTree) {
+            BinaryTree<Type> other = (BinaryTree<Type>) obj;
+            if (this.forwardOrderArray().equals(other.forwardOrderArray())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.forwardOrderArray().hashCode();
+    }
+
+    private Node<Type> getNode(Type value) {
+        Node<Type> node = this.root;
+        if (this.root.value == null) {
+            return null;
+        }
+        while (node != null) {
+            int result = value.compareTo(node.value);
+            if (result < 0) {
+                node = node.leftNode;
+            } else if (result > 0) {
+                node = node.rightNode;
+            } else {
+                return node;
+            }
+        }
+        return null;
+    }
+
     private Node<Type> createNode(Type value){
         Node<Type> parentNode = this.root;
         if(this.root.value == null){
@@ -88,125 +175,141 @@ public class BinaryTree <Type extends Comparable> {
         }
         Node<Type> newNode = null;
         while(newNode == null){
-            switch(value.compareTo(parentNode.value)){
-                case -1:{
-                    if(parentNode.leftNode == null){
-                        newNode = new Node<>(value);
-                        newNode.parentNode = parentNode;
-                        parentNode.leftNode = newNode;
-                    } else
-                        parentNode = parentNode.leftNode;
-                    break;
+            int result = value.compareTo(parentNode.value);
+            if(result < 0) {
+                if (parentNode.leftNode == null) {
+                    newNode = new Node<>(value);
+                    newNode.parentNode = parentNode;
+                    parentNode.leftNode = newNode;
+                } else {
+                    parentNode = parentNode.leftNode;
                 }
-                case 1: {
-                    if (parentNode.rightNode == null) {
-                        newNode = new Node<>(value);
-                        newNode.parentNode = parentNode;
-                        parentNode.rightNode = newNode;
-                    } else
-                        parentNode = parentNode.rightNode;
-                    break;
+            } else if(result > 0) {
+                if (parentNode.rightNode == null) {
+                    newNode = new Node<>(value);
+                    newNode.parentNode = parentNode;
+                    parentNode.rightNode = newNode;
+                } else {
+                    parentNode = parentNode.rightNode;
                 }
-                case 0:{
-                    if(parentNode.leftNode == null){
-                        newNode = new Node<>(value);
-                        newNode.parentNode = parentNode;
-                        parentNode.leftNode = newNode;
-                    }
-                    else{
-                        newNode = new Node<>(value);
-                        newNode.parentNode = parentNode;
-                        newNode.leftNode = parentNode.leftNode;
-                        parentNode.leftNode = newNode;
-                    }
-                    break;
+            } else {
+                if(parentNode.leftNode == null){
+                    newNode = new Node<>(value);
+                    newNode.parentNode = parentNode;
+                    parentNode.leftNode = newNode;
+                }
+                else{
+                    newNode = new Node<>(value);
+                    newNode.parentNode = parentNode;
+                    newNode.leftNode = parentNode.leftNode;
+                    parentNode.leftNode = newNode;
                 }
             }
         }
         return newNode;
     }
-    private void changeSubTree(Node<Type> node){
-        if(node == null)
+
+    private void changeSubTree(Node<Type> node) {
+        if (node == null)
             return;
-        if(Math.abs(((node.leftNode != null)? node.leftNode.height : 0 ) -
-                ((node.rightNode != null)? node.rightNode.height :  0)) < 2){
-            node.height = 1 + Math.max((node.leftNode != null)? node.leftNode.height : 0 ,
-                    (node.rightNode != null)? node.rightNode.height :  0);
+        if (Math.abs(((node.leftNode != null) ? node.leftNode.height : 0) -
+                ((node.rightNode != null) ? node.rightNode.height : 0)) < 2) {
+            node.height = 1 + Math.max((node.leftNode != null) ? node.leftNode.height : 0,
+                    (node.rightNode != null) ? node.rightNode.height : 0);
             changeSubTree(node.parentNode);
-        }
-        else{
+        } else {
             node = balanceTree(node);
             changeSubTree(node);
         }
     }
-    private ArrayList<Node<Type>> symmetricOrder(Node<Type> root){
+
+    private ArrayList<Node<Type>> symmetricOrder(Node<Type> root) {
         ArrayList<Node<Type>> list = new ArrayList<>();
         addToListSO(root, list);
         return list;
     }
-    private void addToListSO(Node<Type> root, ArrayList<Node<Type>> list){
-        if(root == null)
+
+    private ArrayList<Node<Type>> forwardOrder(Node<Type> root) {
+        ArrayList<Node<Type>> list = new ArrayList<>();
+        addToListFO(root, list);
+        return list;
+    }
+
+    private void addToListSO(Node<Type> root, ArrayList<Node<Type>> list) {
+        if (root == null) {
             return;
+        }
         addToListSO(root.leftNode, list);
         list.add(root);
         addToListSO(root.rightNode, list);
     }
-    private Node<Type> buildTree(List<Node<Type>> list){
-        if(list.equals(EMPTY_LIST))
+
+    private void addToListFO(Node<Type> root, ArrayList<Node<Type>> list) {
+        if (root == null) {
+            return;
+        }
+        list.add(root);
+        addToListFO(root.leftNode, list);
+        addToListFO(root.rightNode, list);
+    }
+
+    private void addToStrFO(Node<Type> root, StringBuilder str) {
+        if (root == null) {
+            return;
+        }
+        str.append(root.value.toString());
+        if (root.leftNode != null || root.rightNode != null) {
+            str.append("(");
+            addToStrFO(root.leftNode, str);
+            str.append(")(");
+            addToStrFO(root.rightNode, str);
+            str.append(")");
+        } else {
+            return;
+        }
+    }
+
+    private Node<Type> buildTree(List<Node<Type>> list) {
+        if (list.equals(EMPTY_LIST)) {
             return null;
-        Node<Type> root = list.get(list.size()/2);
-        root.leftNode = buildTree(list.subList(0, list.size()/2));
-        if(root.leftNode != null)
+        }
+        Node<Type> root = list.get(list.size() / 2);
+        root.leftNode = buildTree(list.subList(0, list.size() / 2));
+        if (root.leftNode != null) {
             root.leftNode.parentNode = root;
-        root.rightNode = buildTree(list.subList(list.size()/2+1, list.size()));
-        if(root.rightNode != null)
+        }
+        root.rightNode = buildTree(list.subList(list.size() / 2 + 1, list.size()));
+        if (root.rightNode != null) {
             root.rightNode.parentNode = root;
-        root.height = 1 + Math.max((root.leftNode != null)? root.leftNode.height : 0 ,
-                (root.rightNode != null)? root.rightNode.height :  0);
+        }
+        root.height = 1 + Math.max((root.leftNode != null) ? root.leftNode.height : 0,
+                (root.rightNode != null) ? root.rightNode.height : 0);
         return root;
     }
 
     /**
      * @param node is sheet which consist in unbalanced tree
      */
-    private Node<Type> balanceTree(Node<Type> node){
+    private Node<Type> balanceTree(Node<Type> node) {
         Node<Type> root = node;
-        while(Math.abs(((root.leftNode != null)? root.leftNode.height : 0 ) -
-                ((root.rightNode != null)? root.rightNode.height :  0)) < 2)
+        while (Math.abs(((root.leftNode != null) ? root.leftNode.height : 0) -
+                ((root.rightNode != null) ? root.rightNode.height : 0)) < 2) {
             root = root.parentNode;
+        }
         Node<Type> parentOfRoot = root.parentNode;
         Node<Type> tmp = root;
         ArrayList<Node<Type>> list = this.symmetricOrder(root);
         root = buildTree(list);
-        if(parentOfRoot != null){
-            if(parentOfRoot.leftNode == tmp)
+        if (parentOfRoot != null) {
+            if (parentOfRoot.leftNode == tmp) {
                 parentOfRoot.leftNode = root;
-            else
+            } else {
                 parentOfRoot.rightNode = root;
-        } else
+            }
+        } else {
             this.root = root;
+        }
         root.parentNode = parentOfRoot;
         return root;
-    }
-    private Node<Type> getNode(Type value){
-        Node<Type> node = this.root;
-        if(this.root.value == null)
-            return null;
-        while(node != null){
-            switch(value.compareTo(node.value)){
-                case -1:{
-                    node = node.leftNode;
-                    break;
-                }
-                case 1: {
-                    node = node.rightNode;
-                    break;
-                }
-                case 0:{
-                    return node;
-                }
-            }
-        }
-        return null;
     }
 }

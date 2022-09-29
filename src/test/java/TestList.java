@@ -5,13 +5,21 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TestList {
 
     @Test
-    void constructorsAndSize() {
+    void constructorsEqualsAndSize() {
         myList<Integer> list1 = new myList<>();
+        list1.hashCode();
         myList<Integer> list2 = new myList<>(10);
         myList<Integer> list3 = new myList<>(10, 12, 21);
         assertEquals(0, list1.size());
         assertEquals(1, list2.size());
         assertEquals(3, list3.size());
+        list2.push(12);
+        list2.push(21);
+        assertTrue(list2.equals(list3));
+        list2.push(1);
+        assertFalse(list2.equals(list3));
+        myList<String> list4 = new myList<>("10", "12", "21", "1");
+        assertFalse(list2.equals(list4));
     }
 
     @Test
@@ -56,7 +64,7 @@ public class TestList {
     void deleteFirstElm(){
         myList<Integer> list = new myList<>();
         try{
-            list.deleleFirstElm();
+            list.deleteFirstElm();
         }
         catch (UnsupportedOperationException e){
             assertTrue(true);
@@ -64,7 +72,7 @@ public class TestList {
         for(int i = -100; i < 100; i++){
             list.push(i);
         }
-        assertEquals(-100, list.deleleFirstElm());
+        assertEquals(-100, list.deleteFirstElm());
         assertEquals(-99, list.get(0));
     }
     @Test
@@ -105,6 +113,10 @@ public class TestList {
     }
     @Test
     void toStr(){
+        myList<String> emplyList = new myList<>();
+        assertEquals("[]", emplyList.toString());
+        emplyList = new myList<>("1", null);
+        assertEquals("[1,null]", emplyList.toString());
         myList<String> list = new myList<>("Hello", " World!");
         assertEquals("[Hello, World!]", list.toString());
     }

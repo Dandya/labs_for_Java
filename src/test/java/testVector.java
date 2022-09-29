@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class testVector {
     @Test
-    void constructors(){
+    void constructorsAndEquals(){
         myVector<Integer> dynamicArr = new myVector<>(10);
         assertEquals(null, dynamicArr.get(0));
         try{ assertEquals(null, dynamicArr.get(10)); }
@@ -86,5 +86,29 @@ public class testVector {
         catch (ArrayIndexOutOfBoundsException e){ assertTrue(true); }
         dynamicArr.push(1);
         assertEquals(1, dynamicArr.get(0));
+    }
+    @Test
+    void Equals(){
+        myVector<Integer> vr = new myVector<>(10, 2, 10, 5);
+        myVector<Integer> vr2 = new myVector<>(4);
+        vr2.insert(10, 0); vr2.insert(2, 1);
+        vr2.insert(10, 2); vr2.insert(5, 3);
+        assertTrue(vr.equals(vr2));
+        assertEquals(vr.hashCode(), vr2.hashCode());
+        vr2.insert(11, 0);
+        assertFalse(vr.equals(vr2));
+        vr2.insert(10, 0);
+        vr2.push(-2);
+        assertFalse(vr.equals(vr2));
+        assertNotEquals(vr.hashCode(), vr2.hashCode());
+    }
+    @Test
+    void toStr(){
+        myVector<String> emplyList = new myVector<>();
+        assertEquals("[]", emplyList.toString());
+        emplyList = new myVector<>(2);
+        assertEquals("[null,null]", emplyList.toString());
+        myVector<String> list = new myVector<>("Hello", " World!");
+        assertEquals("[Hello, World!]", list.toString());
     }
 }
