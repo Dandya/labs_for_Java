@@ -1,5 +1,7 @@
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public class myList<Type> {
     private static class Element<Type> {
         public Type value;
