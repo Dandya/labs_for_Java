@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DecimalFormat;
 
-public class Complex<T extends Comparable> {
+public class Complex {
 
     private BigDecimal real;
     private BigDecimal imag;
@@ -17,8 +17,8 @@ public class Complex<T extends Comparable> {
         this.imag = new BigDecimal(imag);
     }
 
-    public static Complex<Comparable> valueOf(double real, double imag) {
-        return new Complex<Comparable>(real, imag);
+    public static Complex valueOf(double real, double imag) {
+        return new Complex(real, imag);
     }
 
     public BigDecimal getReal() {
@@ -29,22 +29,22 @@ public class Complex<T extends Comparable> {
         return this.imag;
     }
 
-    public Complex<Comparable> add(Complex<Comparable> other) {
-        Complex<Comparable> newObj = new Complex<Comparable>();
+    public Complex add(Complex other) {
+        Complex newObj = new Complex();
         newObj.real = this.real.add(other.real);
         newObj.imag = this.imag.add(other.imag);
         return newObj;
     }
 
-    public Complex<Comparable> sub(Complex<Comparable> other) {
-        Complex<Comparable> newObj = new Complex<Comparable>();
+    public Complex sub(Complex other) {
+        Complex newObj = new Complex();
         newObj.real = this.real.subtract(other.real);
         newObj.imag = this.imag.subtract(other.imag);
         return newObj;
     }
 
-    public Complex<Comparable> mul(Complex<Comparable> other) {
-        Complex<Comparable> newObj = new Complex<Comparable>();
+    public Complex mul(Complex other) {
+        Complex newObj = new Complex();
         newObj.real = this.real.multiply(other.real).subtract(this.imag.multiply(other.imag));
         newObj.imag = this.imag.multiply(other.real).add(this.real.multiply(other.imag));
         return newObj;
@@ -81,7 +81,7 @@ public class Complex<T extends Comparable> {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Complex) {
-            Complex<Comparable> other = (Complex<Comparable>) obj;
+            Complex other = (Complex) obj;
             return this.real.equals(other.real) && this.imag.equals(other.imag);
         }
         return false;
