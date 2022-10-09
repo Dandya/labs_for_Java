@@ -262,22 +262,22 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
         Type[] rightArr = new Type[sizeRight];
         for(int i  = mid; i < end; i++) {
-            
+            rightArr[i-mid] = arrSrc[i];
         }
-        mergeSortR(leftList, 0, sizeLeft);
-        mergeSortR(rightList, 0,  sizeRight);
+        mergeSortR(leftArr, 0, sizeLeft);
+        mergeSortR(rightArr, 0,  sizeRight);
         int index = begin;
         for(int i = 0, j = 0; i < sizeLeft || j < sizeRight;) {
             if(i == sizeLeft) {
-                listSrc.set(index, rightList.get(j));
+                arrSrc[index] = rightArr[j];
                 j++;
                 index++;
             } else if(j == sizeRight) {
-                listSrc.set(index, leftList.get(i));
+                arrSrc[index] = leftArr[i];
                 i++;
                 index++;
-            } else if (leftList.get(i).compareTo(rightList.get(j)) < 0) {
-                listSrc.set(index, leftList.get(i));
+            } else if (leftArr[i].compareTo(rightArr[j]) < 0) {
+                arrSrc[index] = leftArr[i];
                 i++;
                 index++;
             } else {
