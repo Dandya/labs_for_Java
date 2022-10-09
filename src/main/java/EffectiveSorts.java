@@ -281,13 +281,22 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
                 i++;
                 index++;
             } else {
-                listSrc.set(index, rightList.get(j));
+                arrSrc[index] = rightArr[j];
                 j++;
                 index++;
             }
         }
     }
 
+    public void MergeSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
+            NullPointerException, IllegalArgumentException {
+        testOfParameters(arr, begin, end);
+        if(end - begin == 0) {
+            return;
+        }
+        mergeSortR(arr, begin, end);
+    }
+    
     public void MergeSort(Type[] arr) throws ArrayIndexOutOfBoundsException,
             NullPointerException, IllegalArgumentException {
         this.QuickSort(arr, 0, arr.length);
