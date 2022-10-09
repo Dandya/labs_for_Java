@@ -1,7 +1,5 @@
-import javax.lang.model.element.TypeElement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
 
 public class EffectiveSorts<Type extends Comparable<Type>> {
 
@@ -252,22 +250,41 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         this.MergeSort(list, 0, list.size());
     }
 
-    public void MergeSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
-        testOfParameters(arr, begin, end);
-        if(end - begin == 0) {
+    private void mergeSortR(Type[] arrSrc, int begin, int end) {
+        if(end - begin == 1) {
             return;
         }
-        // create start tree
-        for(int i = (end - begin)/2 -1 + begin; i >= begin; i--) {
-            changeTree(arr, i, begin, end);
+        int mid = (end - begin)/2 + begin;
+        int sizeLeft = mid - begin, sizeRight = end - mid;
+        Type[] leftArr = new Type[sizeLeft];
+        for(int i  = begin; i < mid; i++) {
+            leftArr[i-begin] = arrSrc[i];
         }
-        // sort of arr
-        for (int i = end - 1; i >= begin; i--) {
-            Type tmp = arr[i];
-            arr[i] = arr[begin];
-            arr[begin] = tmp;
-            changeTree(arr, begin, begin, i);
+        Type[] rightArr = new Type[sizeRight];
+        for(int i  = mid; i < end; i++) {
+            
+        }
+        mergeSortR(leftList, 0, sizeLeft);
+        mergeSortR(rightList, 0,  sizeRight);
+        int index = begin;
+        for(int i = 0, j = 0; i < sizeLeft || j < sizeRight;) {
+            if(i == sizeLeft) {
+                listSrc.set(index, rightList.get(j));
+                j++;
+                index++;
+            } else if(j == sizeRight) {
+                listSrc.set(index, leftList.get(i));
+                i++;
+                index++;
+            } else if (leftList.get(i).compareTo(rightList.get(j)) < 0) {
+                listSrc.set(index, leftList.get(i));
+                i++;
+                index++;
+            } else {
+                listSrc.set(index, rightList.get(j));
+                j++;
+                index++;
+            }
         }
     }
 
