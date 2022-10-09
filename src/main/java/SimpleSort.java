@@ -31,7 +31,7 @@ public class SimpleSort<Type extends Comparable<Type>> {
         }
     }
 
-    public List<Type> BubbleSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public void BubbleSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         testOfParameters(list, begin, end);
         boolean was_change = true;
@@ -44,15 +44,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return list;
     }
 
-    public List<Type> BubbleSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
+    public void BubbleSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
             NullPointerException, IllegalArgumentException {
-        return this.BubbleSort(list, 0, list.size());
+        this.BubbleSort(list, 0, list.size());
     }
 
-    public Type[] BubbleSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public void BubbleSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         testOfParameters(arr, begin, end);
         boolean was_change = true;
@@ -67,15 +66,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public Type[] BubbleSort(Type[] arr) throws ArrayIndexOutOfBoundsException, 
+    public void BubbleSort(Type[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return this.BubbleSort(arr, 0, arr.length);
+        this.BubbleSort(arr, 0, arr.length);
     }
 
-    public List<Type> InputSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public void InputSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         testOfParameters(list, begin, end);
         for(int i = begin + 1; i < end; i++) {
@@ -87,15 +85,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             list.set(j+1, value);
         }
-        return list;
     }
 
-    public List<Type> InputSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
+    public void InputSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
             NullPointerException, IllegalArgumentException {
-        return this.InputSort(list, 0, list.size());
+        this.InputSort(list, 0, list.size());
     }
 
-    public Type[] InputSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public void InputSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         testOfParameters(arr, begin, end);
         for(int i = begin + 1; i < end; i++) {
@@ -107,15 +104,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public Type[] InputSort(Type[] arr) throws ArrayIndexOutOfBoundsException, 
+    public void InputSort(Type[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return this.InputSort(arr, 0, arr.length);
+        this.InputSort(arr, 0, arr.length);
     }
 
-    public List<Type> SelectSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public void SelectSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         testOfParameters(list, begin, end);
         int indexOfNextMinimal = begin;
@@ -129,15 +125,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             list.set(indexOfMinimal, list.set(indexOfNextMinimal, list.get(indexOfMinimal)));
             indexOfNextMinimal++;
         }
-        return list;
     }
 
-    public List<Type> SelectSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
+    public void SelectSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
             NullPointerException, IllegalArgumentException {
-        return this.SelectSort(list, 0, list.size());
+        this.SelectSort(list, 0, list.size());
     }
 
-    public Type[] SelectSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public void SelectSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         testOfParameters(arr, begin, end);
         int indexOfNextMinimal = begin;
@@ -153,15 +148,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public Type[] SelectSort(Type[] arr) throws ArrayIndexOutOfBoundsException, 
+    public void SelectSort(Type[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return this.SelectSort(arr, 0, arr.length);
+        this.SelectSort(arr, 0, arr.length);
     }
 
-    public static byte[] BubbleSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -184,15 +178,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static byte[] BubbleSort(byte[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(byte[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static byte[] InputSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -212,15 +205,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static byte[] InputSort(byte[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(byte[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static byte[] SelectSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -244,15 +236,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static byte[] SelectSort(byte[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(byte[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 
-    public static short[] BubbleSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -275,15 +266,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static short[] BubbleSort(short[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(short[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static short[] InputSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -303,15 +293,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static short[] InputSort(short[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(short[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static short[] SelectSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -335,15 +324,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static short[] SelectSort(short[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(short[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 
-    public static int[] BubbleSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -366,15 +354,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static int[] BubbleSort(int[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(int[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static int[] InputSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -394,15 +381,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static int[] InputSort(int[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(int[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static int[] SelectSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -426,15 +412,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static int[] SelectSort(int[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(int[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 
-    public static long[] BubbleSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -457,15 +442,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static long[] BubbleSort(long[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(long[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static long[] InputSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -485,15 +469,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static long[] InputSort(long[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(long[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static long[] SelectSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -517,15 +500,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static long[] SelectSort(long[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(long[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 
-    public static float[] BubbleSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -548,15 +530,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static float[] BubbleSort(float[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(float[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static float[] InputSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -576,15 +557,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static float[] InputSort(float[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(float[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static float[] SelectSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -608,15 +588,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static float[] SelectSort(float[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(float[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 
-    public static double[] BubbleSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -639,15 +618,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static double[] BubbleSort(double[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(double[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static double[] InputSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -667,15 +645,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static double[] InputSort(double[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(double[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static double[] SelectSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -699,15 +676,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static double[] SelectSort(double[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(double[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 
-    public static char[] BubbleSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -730,15 +706,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
                 }
             }
         }
-        return arr;
     }
 
-    public static char[] BubbleSort(char[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void BubbleSort(char[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return BubbleSort(arr, 0, arr.length);
+        BubbleSort(arr, 0, arr.length);
     }
 
-    public static char[] InputSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -758,15 +733,14 @@ public class SimpleSort<Type extends Comparable<Type>> {
             }
             arr[j+1] = value;
         }
-        return arr;
     }
 
-    public static char[] InputSort(char[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void InputSort(char[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return InputSort(arr, 0, arr.length);
+        InputSort(arr, 0, arr.length);
     }
 
-    public static char[] SelectSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
         if(arr == null) {
             throw new NullPointerException();
@@ -790,11 +764,10 @@ public class SimpleSort<Type extends Comparable<Type>> {
             arr[indexOfMinimal] = tmp;
             indexOfNextMinimal++;
         }
-        return arr;
     }
 
-    public static char[] SelectSort(char[] arr) throws ArrayIndexOutOfBoundsException, 
+    public static void SelectSort(char[] arr) throws ArrayIndexOutOfBoundsException, 
             NullPointerException, IllegalArgumentException {
-        return SelectSort(arr, 0, arr.length);
+        SelectSort(arr, 0, arr.length);
     }
 }

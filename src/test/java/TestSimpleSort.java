@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestSimpleSort {
 
-    private static final boolean isInputTest = false;
-
+    //TODO: add test on empty array and list
     private void sortInBounds(List<Integer> list, int begin, int end) {
         /*
         subList ссылается на ту же память, что и list
@@ -37,13 +36,15 @@ class TestSimpleSort {
         SimpleSort<Integer> Sorts = new SimpleSort<>();
         //---- sort full
         ArrayList<Integer> list = new ArrayList<>();
+        Sorts.BubbleSort(list);
         int size = rand.nextInt(0, 353);
         for(int i = 0; i < size; i++){
             list.add(rand.nextInt());
         }
         List<Integer> rightList = (List<Integer>) list.clone();
         Collections.sort(rightList);
-        assertTrue(Equals(rightList, Sorts.BubbleSort(list)));
+        Sorts.BubbleSort(list);
+        assertTrue(Equals(rightList, list));
         size = rand.nextInt(0, 353);
         Integer[] arrInt = new Integer[size];
         Integer[] rightArrInt = new Integer[size];
@@ -52,7 +53,8 @@ class TestSimpleSort {
             rightArrInt[i] = arrInt[i];
         }
         Arrays.sort(rightArrInt);
-        assertArrayEquals(rightArrInt, Sorts.BubbleSort(arrInt));
+        Sorts.BubbleSort(arrInt);
+        assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -63,7 +65,8 @@ class TestSimpleSort {
         }
         rightList = (List<Integer>) list.clone();
         sortInBounds(rightList, begin, end);
-        assertTrue(Equals(rightList, Sorts.BubbleSort(list, begin, end)));
+        Sorts.BubbleSort(list, begin, end);
+        assertTrue(Equals(rightList, list));
         arrInt = new Integer[size];
         rightArrInt = new Integer[size];
         for(int i = 0; i < size; i++){
@@ -71,7 +74,8 @@ class TestSimpleSort {
             rightArrInt[i] = arrInt[i];
         }
         Arrays.sort(rightArrInt, begin, end);
-        assertArrayEquals(rightArrInt, Sorts.BubbleSort(arrInt, begin, end));
+        Sorts.BubbleSort(arrInt, begin, end);
+        assertArrayEquals(rightArrInt, arrInt);
         //---- test on Exception
         try{
             Sorts.BubbleSort((List<Integer>) null);
@@ -106,7 +110,8 @@ class TestSimpleSort {
         }
         List<Integer> rightList = (List<Integer>) list.clone();
         Collections.sort(rightList);
-        assertTrue(Equals(rightList, Sorts.InputSort(list)));
+        Sorts.InputSort(list);
+        assertTrue(Equals(rightList, list));
         size = rand.nextInt(0, 353);
         Integer[] arrInt = new Integer[size];
         Integer[] rightArrInt = new Integer[size];
@@ -115,7 +120,8 @@ class TestSimpleSort {
             rightArrInt[i] = arrInt[i];
         }
         Arrays.sort(rightArrInt);
-        assertArrayEquals(rightArrInt, Sorts.InputSort(arrInt));
+        Sorts.InputSort(arrInt);
+        assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -126,7 +132,8 @@ class TestSimpleSort {
         }
         rightList = (List<Integer>) list.clone();
         sortInBounds(rightList, begin, end);
-        assertTrue(Equals(rightList, Sorts.InputSort(list, begin, end)));
+        Sorts.InputSort(list, begin, end);
+        assertTrue(Equals(rightList, list));
         arrInt = new Integer[size];
         rightArrInt = new Integer[size];
         for(int i = 0; i < size; i++){
@@ -134,7 +141,8 @@ class TestSimpleSort {
             rightArrInt[i] = arrInt[i];
         }
         Arrays.sort(rightArrInt, begin, end);
-        assertArrayEquals(rightArrInt, Sorts.InputSort(arrInt, begin, end));
+        Sorts.InputSort(arrInt, begin, end);
+        assertArrayEquals(rightArrInt, arrInt);
         //---- test on Exception
         try{
             Sorts.InputSort((List<Integer>) null);
@@ -170,7 +178,8 @@ class TestSimpleSort {
         }
         List<Integer> rightList = (List<Integer>) list.clone();
         Collections.sort(rightList);
-        assertTrue(Equals(rightList, Sorts.SelectSort(list)));
+        Sorts.SelectSort(list);
+        assertTrue(Equals(rightList, list));
         size = rand.nextInt(0, 353);
         Integer[] arrInt = new Integer[size];
         Integer[] rightArrInt = new Integer[size];
@@ -179,7 +188,8 @@ class TestSimpleSort {
             rightArrInt[i] = arrInt[i];
         }
         Arrays.sort(rightArrInt);
-        assertArrayEquals(rightArrInt, Sorts.SelectSort(arrInt));
+        Sorts.SelectSort(arrInt);
+        assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -190,7 +200,8 @@ class TestSimpleSort {
         }
         rightList = (List<Integer>) list.clone();
         sortInBounds(rightList, begin, end);
-        assertTrue(Equals(rightList, Sorts.SelectSort(list, begin, end)));
+        Sorts.SelectSort(list, begin, end);
+        assertTrue(Equals(rightList, list));
         arrInt = new Integer[size];
         rightArrInt = new Integer[size];
         for(int i = 0; i < size; i++){
@@ -198,7 +209,8 @@ class TestSimpleSort {
             rightArrInt[i] = arrInt[i];
         }
         Arrays.sort(rightArrInt, begin, end);
-        assertArrayEquals(rightArrInt, Sorts.SelectSort(arrInt, begin, end));
+        Sorts.SelectSort(arrInt, begin, end);
+        assertArrayEquals(rightArrInt, arrInt);
         //---- test on Exception
         try{
             Sorts.SelectSort((List<Integer>) null);
@@ -228,18 +240,25 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         byte[] arr = new byte[size];
-        byte[] rightArr;
+        byte[] rightArr, tmp;
         rand.nextBytes(arr);
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (byte) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -247,15 +266,21 @@ class TestSimpleSort {
         arr = new byte[size];
         rand.nextBytes(arr);
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (byte) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((byte[]) null);
@@ -285,20 +310,26 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         short[] arr = new short[size];
-        short[] rightArr;
+        short[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
             arr[i] = (short) rand.nextInt();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (short) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -308,15 +339,21 @@ class TestSimpleSort {
             arr[i] = (short) rand.nextInt();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (short) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((short[]) null);
@@ -346,20 +383,26 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         int[] arr = new int[size];
-        int[] rightArr;
+        int[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
             arr[i] = rand.nextInt();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (int) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -369,15 +412,21 @@ class TestSimpleSort {
             arr[i] = rand.nextInt();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (int) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((int[]) null);
@@ -407,20 +456,26 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         long[] arr = new long[size];
-        long[] rightArr;
+        long[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
             arr[i] = rand.nextLong();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (long) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -430,15 +485,21 @@ class TestSimpleSort {
             arr[i] = rand.nextLong();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (long) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((long[]) null);
@@ -468,20 +529,26 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         char[] arr = new char[size];
-        char[] rightArr;
+        char[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
             arr[i] = (char) rand.nextInt();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (char) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -491,15 +558,21 @@ class TestSimpleSort {
             arr[i] = (char) rand.nextInt();
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (char) (arr[0] + 1);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((char[]) null);
@@ -529,20 +602,26 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         float[] arr = new float[size];
-        float[] rightArr;
+        float[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
             arr[i] = rand.nextFloat() +((float) rand.nextInt());
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (float) (arr[0] + 1e10f);
             assertTrue(rightArr[0] - arr[0] > 1E-5);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -552,15 +631,21 @@ class TestSimpleSort {
             arr[i] = rand.nextFloat() +((float) rand.nextInt());
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (float) (arr[0] + 1e10f);
             assertTrue(rightArr[0] - arr[0] > 1E-5);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((float[]) null);
@@ -590,20 +675,26 @@ class TestSimpleSort {
         //---- sort full
         int size = rand.nextInt(0, 353);
         double[] arr = new double[size];
-        double[] rightArr;
+        double[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
             arr[i] = rand.nextDouble() +((double) rand.nextInt());
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (double) (arr[0] + 1e10d);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length)));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length)));
+        SimpleSort.BubbleSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr);
+        assertArrayEquals(rightArr, arr);
         //---- sort with bounds
         size = rand.nextInt(1, 353);
         int begin = rand.nextInt(0, size-1);
@@ -613,15 +704,21 @@ class TestSimpleSort {
             arr[i] = rand.nextDouble() +((double) rand.nextInt());
         }
         rightArr = Arrays.copyOf(arr, arr.length);
+        tmp = Arrays.copyOf(arr, arr.length);
         if(size > 0) {
             rightArr[0] = (double) (arr[0] + 1e10d);
             assertTrue(rightArr[0] != arr[0]);
             rightArr[0] = arr[0];
         }
         Arrays.sort(rightArr, begin, end);
-        assertArrayEquals(rightArr, SimpleSort.BubbleSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.InputSort(Arrays.copyOf(arr, arr.length), begin, end));
-        assertArrayEquals(rightArr, SimpleSort.SelectSort(Arrays.copyOf(arr, arr.length), begin, end));
+        SimpleSort.BubbleSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.InputSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
+        arr = Arrays.copyOf(tmp, tmp.length);
+        SimpleSort.SelectSort(arr, begin, end);
+        assertArrayEquals(rightArr, arr);
         //---- test on Exception
         try{
             SimpleSort.SelectSort((double[]) null);
