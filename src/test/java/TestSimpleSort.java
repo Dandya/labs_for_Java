@@ -1,4 +1,3 @@
-import com.sun.source.tree.AssertTree;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -10,7 +9,6 @@ class TestSimpleSort {
     //TODO: add test on empty array and list
     private void sortInBounds(List<Integer> list, int begin, int end) {
         /*
-        subList ссылается на ту же память, что и list
         https://docs.oracle.com/javase/9/docs/api/java/util/List.html#subList-int-int-
         "The returned list is backed by this list, so non-structural changes in the returned list are reflected in this list"
          */

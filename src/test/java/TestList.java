@@ -1,8 +1,33 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestList {
+
+    private void sortInBounds(List<Integer> list, int begin, int end) {
+        /*
+        https://docs.oracle.com/javase/9/docs/api/java/util/List.html#subList-int-int-
+        "The returned list is backed by this list, so non-structural changes in the returned list are reflected in this list"
+         */
+        List<Integer> subList = list.subList(begin, end);
+        Collections.sort(subList);
+    }
+
+    private boolean Equals(List<Integer> list1, List<Integer> list2) {
+        if(list1.size() != list2.size()) {
+            return false;
+        }
+        for(int i = 0; i < list1.size(); i++) {
+            if(!list1.get(i).equals(list2.get(i))) {
+                System.out.println(list1);
+                System.out.println(list2);
+                return false;
+            }
+        }
+        return true;
+    }
 
     @Test
     void constructorsEqualsAndSize() {
@@ -20,6 +45,12 @@ public class TestList {
         assertFalse(list2.equals(list3));
         myList<String> list4 = new myList<>("10", "12", "21", "1");
         assertFalse(list2.equals(list4));
+        try {
+            list1 = new myList<>(null);
+            assertTrue(false);
+        } catch (NullPointerException e) {
+            assertTrue(true);
+        }
     }
 
     @Test
@@ -119,5 +150,116 @@ public class TestList {
         assertEquals("[1,null]", emplyList.toString());
         myList<String> list = new myList<>("Hello", " World!");
         assertEquals("[Hello, World!]", list.toString());
+    }
+
+    @Test
+    void iteratorFromBegin(){
+        Random rand = new Random();
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 353);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        Iterator it = list.iterator();
+        for(int i = 0; i < list.size(); i++) {
+            assertTrue(list.get(i).equals(it.next()));
+        }
+    }
+
+    @Test
+    void iteratorFromEnd(){
+        Random rand = new Random();
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 353);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        Iterator it = list.iteratorOnTheEnd();
+        assertTrue(list.get(list.size()-1).equals(it.next()));
+        assertFalse(it.hasNext());
+    }
+
+    @Test
+    void BubbleSort() {
+        Random rand = new Random();
+        SimpleSort<Integer> Sorts = new SimpleSort<>();
+        //---- sort full
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 353);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        List<Integer> rightList = (List<Integer>) list.clone();
+        Collections.sort(rightList);
+        Sorts.BubbleSort(list);
+        assertTrue(Equals(rightList, list));
+        //---- sort with bounds
+        size = rand.nextInt(1, 353);
+        int begin = rand.nextInt(0, size-1);
+        int end = rand.nextInt(begin, size-1);
+        list = new myList<>();
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        rightList = (List<Integer>) list.clone();
+        sortInBounds(rightList, begin, end);
+        Sorts.BubbleSort(list, begin, end);
+        assertTrue(Equals(rightList, list));
+    }
+
+    @Test
+    void inputSort() {
+        Random rand = new Random();
+        SimpleSort<Integer> Sorts = new SimpleSort<>();
+        //---- sort full
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 353);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        List<Integer> rightList = (List<Integer>) list.clone();
+        Collections.sort(rightList);
+        Sorts.InputSort(list);
+        assertTrue(Equals(rightList, list));
+        //---- sort with bounds
+        size = rand.nextInt(1, 353);
+        int begin = rand.nextInt(0, size-1);
+        int end = rand.nextInt(begin, size-1);
+        list = new myList<>();
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        rightList = (List<Integer>) list.clone();
+        sortInBounds(rightList, begin, end);
+        Sorts.InputSort(list, begin, end);
+        assertTrue(Equals(rightList, list));
+    }
+
+    @Test
+    void selectSort() {
+        Random rand = new Random();
+        SimpleSort<Integer> Sorts = new SimpleSort<>();
+        //---- sort full
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 353);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        List<Integer> rightList = (List<Integer>) list.clone();
+        Collections.sort(rightList);
+        Sorts.SelectSort(list);
+        assertTrue(Equals(rightList, list));
+        //---- sort with bounds
+        size = rand.nextInt(1, 353);
+        int begin = rand.nextInt(0, size-1);
+        int end = rand.nextInt(begin, size-1);
+        list = new myList<>();
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        rightList = (List<Integer>) list.clone();
+        sortInBounds(rightList, begin, end);
+        Sorts.SelectSort(list, begin, end);
+        assertTrue(Equals(rightList, list));
     }
 }

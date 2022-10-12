@@ -1,8 +1,9 @@
-import org.jetbrains.annotations.NotNull;
-
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
-public class myList<Type> {
+public class myList<Type> implements List {
     private static class Element<Type> {
         public Type value;
         public Element<Type> nextElement;
@@ -12,6 +13,75 @@ public class myList<Type> {
 
         public Element(Type elm) {
             this.value = elm;
+        }
+    }
+
+    private class myIterator implements ListIterator<Type> {
+        private myList<Type> list = null;
+        private Element<Type> nextElm = null;
+        private Element<Type> lastReturnedElm = null;
+        private int indexOfElm = -1;
+
+        public myIterator(){
+        }
+
+        public void setElements(Element<Type> elm, int index, myList<Type> list) {
+            this.nextElm = elm;
+            this.indexOfElm = index;
+            this.list = list;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.nextElm != null;
+        }
+
+        @Override
+        public Type next() {
+            Type tmp = this.nextElm.value;
+            this.lastReturnedElm = this.nextElm;
+            this.nextElm = this.nextElm.nextElement;
+            this.indexOfElm++;
+            return tmp;
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            if(!nextElm.equals(list.firstElement)) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Type previous() {
+            indexOfElm--;
+            this.nextElm = list.getElm(indexOfElm);
+            this.lastReturnedElm = this.nextElm;
+            return this.nextElm.value;
+        }
+
+        @Override
+        public int nextIndex() {
+            return indexOfElm;
+        }
+
+        @Override
+        public int previousIndex() {
+            return indexOfElm-1;
+        }
+
+        @Override
+        public void remove() {
+        }
+
+        @Override
+        public void set(Type type) {
+            this.lastReturnedElm.value = type;
+        }
+
+        @Override
+        public void add(Type type) {
         }
     }
 
@@ -28,7 +98,10 @@ public class myList<Type> {
         this.size++;
     }
 
-    public myList(@NotNull Type... vars) {
+    public myList(Type... vars) throws NullPointerException {
+        if( vars == null ) {
+            throw new NullPointerException();
+        }
         for (Type value : vars) {
             this.push(value);
         }
@@ -155,5 +228,163 @@ public class myList<Type> {
             result += this.get(i).hashCode();
         }
         return result;
+    }
+
+    @Override
+    public Iterator iterator() {
+        myIterator it = new myIterator();
+        it.setElements(this.firstElement, 0, this);
+        return it;
+    }
+
+    public Iterator iteratorOnTheEnd() {
+        myIterator it = new myIterator();
+        it.setElements(this.lastElement, this.size-1, this);
+        return it;
+    }
+
+    @Override
+    public ListIterator listIterator() {
+        myIterator it = new myIterator();
+        it.setElements(this.firstElement, 0, this);
+        return it;
+    }
+
+
+    @Override
+    public ListIterator listIterator(int index) {
+        myIterator it = new myIterator();
+        it.setElements(this.getElm(index), index, this);
+        return it;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return firstElement == null;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        for (int  i = 0; i < this.size; i++) {
+            if(this.get(i).equals(o)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+     
+    @Override
+    public Object[] toArray() {
+        Object[] arr = new Object[this.size];
+        for(int i = 0; i < this.size; i++) {
+            arr[i] = this.get(i);
+        }
+        return arr;
+    }
+
+    @Override
+    public boolean add(Object o) {
+        this.push((Type)o);
+        return true;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        try {
+            deleteByValue((Type)o);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean addAll(  Collection c) {
+        for(Iterator it = c.iterator(); it.hasNext();) {
+            push((Type) it.next());
+        }
+        return true;
+    }
+
+    @Override
+    public void clear() {
+        this.deleteAll();
+    }
+
+    @Override
+    public Object set(int index, Object element) {
+        Element<Type> elm = this.getElm(index);
+        Type tmp = elm.value;
+        elm.value = (Type) element;
+        return tmp;
+    }
+
+     
+    @Override
+    public List subList(int fromIndex, int toIndex) throws IndexOutOfBoundsException {
+        if(fromIndex < 0 || fromIndex >= this.size || toIndex < 0 || toIndex > this.size) {
+            throw new IndexOutOfBoundsException();
+        }
+        myList<Type> list = new myList();
+        list.firstElement = this.getElm(fromIndex);
+        list.lastElement = this.getElm(toIndex-1);
+        list.size = toIndex - fromIndex;
+        return list;
+    }
+
+    public Object clone() {
+        myList<Type> list = new myList<>();
+        for(Iterator it = this.iterator(); it.hasNext(); ) {
+            list.add(it.next());
+        }
+        return list;
+    }
+
+    //---- Заглушки
+
+    @Override
+    public boolean addAll(int index,   Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(  Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(  Collection c) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(  Collection c) {
+        return false;
+    }
+
+     
+    @Override
+    public Object[] toArray(  Object[] a) {
+        return null;
+    }
+
+    @Override
+    public void add(int index, Object element) {
+    }
+
+    @Override
+    public Object remove(int index) {
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return -1;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return -1;
     }
 }
