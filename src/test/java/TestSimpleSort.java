@@ -54,7 +54,7 @@ class TestSimpleSort {
         Sorts.BubbleSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         list = new ArrayList<>();
@@ -121,7 +121,7 @@ class TestSimpleSort {
         Sorts.InputSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         list = new ArrayList<>();
@@ -189,7 +189,7 @@ class TestSimpleSort {
         Sorts.SelectSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         list = new ArrayList<>();
@@ -258,7 +258,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new byte[size];
@@ -329,7 +329,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new short[size];
@@ -402,7 +402,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new int[size];
@@ -475,7 +475,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new long[size];
@@ -548,7 +548,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new char[size];
@@ -621,7 +621,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new float[size];
@@ -694,7 +694,7 @@ class TestSimpleSort {
         SimpleSort.SelectSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new double[size];

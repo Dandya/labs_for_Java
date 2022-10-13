@@ -194,7 +194,7 @@ public class TestList {
         Sorts.BubbleSort(list);
         assertTrue(Equals(rightList, list));
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         list = new myList<>();
@@ -222,7 +222,7 @@ public class TestList {
         Sorts.InputSort(list);
         assertTrue(Equals(rightList, list));
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         list = new myList<>();
@@ -250,7 +250,7 @@ public class TestList {
         Sorts.SelectSort(list);
         assertTrue(Equals(rightList, list));
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         list = new myList<>();

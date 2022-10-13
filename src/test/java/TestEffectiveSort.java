@@ -52,7 +52,7 @@ class TestEffectiveSort {
         Sorts.QuickSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size - 1);
         int end = rand.nextInt(begin, size - 1);
         list = new ArrayList<>();
@@ -120,7 +120,7 @@ class TestEffectiveSort {
         Sorts.HeapSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size - 1);
         int end = rand.nextInt(begin, size - 1);
         list = new ArrayList<>();
@@ -188,7 +188,7 @@ class TestEffectiveSort {
         Sorts.MergeSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size - 1);
         int end = rand.nextInt(begin, size - 1);
         list = new ArrayList<>();
@@ -257,7 +257,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new byte[size];
@@ -328,7 +328,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new short[size];
@@ -401,7 +401,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new int[size];
@@ -474,7 +474,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new long[size];
@@ -547,7 +547,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new char[size];
@@ -620,7 +620,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new float[size];
@@ -693,7 +693,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(1, 353);
+        size = rand.nextInt(2, 353);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new double[size];

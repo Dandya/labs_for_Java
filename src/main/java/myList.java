@@ -47,10 +47,7 @@ public class myList<Type> implements List {
 
         @Override
         public boolean hasPrevious() {
-            if(!nextElm.equals(list.firstElement)) {
-                return true;
-            }
-            return false;
+            return nextElm != list.firstElement;
         }
 
         @Override
@@ -254,6 +251,10 @@ public class myList<Type> implements List {
     @Override
     public ListIterator listIterator(int index) {
         myIterator it = new myIterator();
+        if(index == this.size) {
+            it.setElements(null, index, this);
+            return it;
+        }
         it.setElements(this.getElm(index), index, this);
         return it;
     }
