@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
 
 public class LinSort {
@@ -79,6 +81,42 @@ public class LinSort {
         LSDSort(arr, 0, arr.length);
     }
 
+    public static void LSDSort(int[] arr, int begin, int end) {
+        if( begin < 0 || begin > arr.length || end < 0 || end > arr.length || end < begin) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        String[] arrStr = new String[end-begin];
+        for(int i = begin; i < end; i++) {
+            arrStr[i-begin] = Integer.toString(arr[i]);
+        }
+        LSDSort(arrStr);
+        for(int i = begin; i < end; i++) {
+            arr[i] = Integer.parseInt(arrStr[i-begin]);
+        }
+    }
+
+    public static void LSDSort(int[] arr) {
+        LSDSort(arr, 0, arr.length);
+    }
+
+    public static void LSDSort(BigInteger[] arr, int begin, int end) {
+        if( begin < 0 || begin > arr.length || end < 0 || end > arr.length || end < begin) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        String[] arrStr = new String[end-begin];
+        for(int i = begin; i < end; i++) {
+            arrStr[i-begin] = arr[i].toString();
+        }
+        LSDSort(arrStr);
+        for(int i = begin; i < end; i++) {
+            arr[i] = BigInteger.valueOf(Integer.parseInt(arrStr[i-begin]));
+        }
+    }
+
+    public static void LSDSort(BigInteger[] arr) {
+        LSDSort(arr, 0, arr.length);
+    }
+
     private static void MSDSortR(String[] arr, int begin, int end, int radix) {
         if(begin == end || end - begin == 1) {
             return;
@@ -104,13 +142,11 @@ public class LinSort {
             index++;
         }
         MSDSortR(arr, begin, index, radix-1);
-        String[] negativeNumbs = new String[index - begin];
-        // TODO: change reverse
-        for(int i = index - 1; i >= begin; i--) {
-            negativeNumbs[index-1-i] = arr[i];
-        }
-        for(int i = begin; i < index; i++) {
-            arr[i] = negativeNumbs[i-begin];
+        for (int i = 0; i < (index-begin)/2; i++) { // reverse negative numbers
+            String tmp = arr[i+begin];
+            int indx = (index - begin) - 1 - i + begin;
+            arr[i+begin] = arr[indx];
+            arr[indx] = tmp;
         }
         for (int i = 0; i < 10; i++) {
             int beginIndex = index;
@@ -144,6 +180,50 @@ public class LinSort {
         MSDSort(arr, 0, arr.length);
     }
 
+    public static void MSDSort(int[] arr, int begin, int end) {
+        if( begin < 0 || begin > arr.length || end < 0 || end > arr.length || end < begin) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        String[] arrStr = new String[end-begin];
+        int max_length = 0;
+        for(int i = begin; i < end; i++) {
+            arrStr[i-begin] = Integer.toString(arr[i]);
+            if (arrStr[i-begin].length() > max_length) {
+                max_length = arrStr[i-begin].length();
+            }
+        }
+        MSDSortR(arrStr, 0, arrStr.length, max_length-1);
+        for(int i = begin; i < end; i++) {
+            arr[i] = Integer.parseInt(arrStr[i-begin]);
+        }
+    }
+
+    public static void MSDSort(int[] arr) {
+        MSDSort(arr, 0, arr.length);
+    }
+
+    public static void MSDSort(BigInteger[] arr, int begin, int end) {
+        if( begin < 0 || begin > arr.length || end < 0 || end > arr.length || end < begin) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        String[] arrStr = new String[end-begin];
+        int max_length = 0;
+        for(int i = begin; i < end; i++) {
+            arrStr[i-begin] = arr[i].toString();
+            if (arrStr[i-begin].length() > max_length) {
+                max_length = arrStr[i-begin].length();
+            }
+        }
+        MSDSortR(arrStr, 0, arrStr.length, max_length-1);
+        for(int i = begin; i < end; i++) {
+            arr[i] = BigInteger.valueOf(Integer.parseInt(arrStr[i-begin]));
+        }
+    }
+
+    public static void MSDSort(BigInteger[] arr) {
+        MSDSort(arr, 0, arr.length);
+    }
+
     public static void CountSort(Integer[] arr, int begin, int end) {
         if( begin < 0 || begin > arr.length || end < 0 || end > arr.length || end < begin) {
             throw new ArrayIndexOutOfBoundsException();
@@ -166,6 +246,51 @@ public class LinSort {
     }
 
     public static void CountSort(Integer[] arr) {
+        CountSort(arr, 0, arr.length);
+    }
+
+    public static void CountSort(int[] arr, int begin, int end) {
+        Integer[] newArr = new Integer[arr.length];
+        for(int i = 0; i < arr.length; i++) {
+            newArr[i] = arr[i];
+        }
+        CountSort(newArr, begin, end);
+        for(int i = 0; i < arr.length; i++) {
+            arr[i] = newArr[i];
+        }
+    }
+
+    public static void CountSort(int[] arr) {
+        CountSort(arr, 0, arr.length);
+    }
+
+    public static void CountSort(BigInteger[] arr, int begin, int end) {
+        if( begin < 0 || begin > arr.length || end < 0 || end > arr.length || end < begin) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        TreeMap<BigInteger, Integer> tree = new TreeMap<>(new Comparator(){
+            @Override
+            public int compare(Object o1, Object o2) {
+                return ((BigInteger)o1).compareTo((BigInteger)o2);
+            }
+        });
+        for(int i  = begin; i < end; i++) {
+            if(tree.containsKey(arr[i])) {
+                tree.put(arr[i], tree.get(arr[i])+1);
+            } else {
+                tree.put(arr[i], 1);
+            }
+        }
+        int index = begin;
+        for (Iterator it = tree.keySet().iterator(); it.hasNext();) {
+            BigInteger key = (BigInteger) it.next();
+            for(int i = 0; i < tree.get(key); i++) {
+                arr[index++] = key;
+            }
+        }
+    }
+
+    public static void CountSort(BigInteger[] arr) {
         CountSort(arr, 0, arr.length);
     }
 }

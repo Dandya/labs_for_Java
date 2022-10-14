@@ -153,6 +153,57 @@ public class TestList {
     }
 
     @Test
+    void add() {
+        Random rand = new Random();
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 4);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        Integer tmp = null, value = rand.nextInt();
+        int index = rand.nextInt(0,size+1);
+        if(index < list.size()) {
+            tmp = list.get(index);
+        }
+        list.add(index, value);
+        assertEquals(value, list.get(index));
+        if(index != list.size()-1) {
+            assertEquals(tmp, list.get(index+1));
+        }
+    }
+
+    @Test
+    void remove() {
+        Random rand = new Random();
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(0, 4);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        int index = rand.nextInt(0, size);
+        Integer value = list.get(index), tmp = null;
+        if(index+1 < list.size()) {
+            tmp = list.get(index+1);
+        }
+        assertEquals(value, list.remove(index));
+        if(index < list.size()) {
+            assertEquals(tmp, list.get(index));
+        }
+        try {
+            list.remove(list.size());
+            fail();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            assertTrue(true);
+        }
+        try {
+            list.remove(-1);
+            fail();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            assertTrue(true);
+        }
+    }
+
+    @Test
     void iteratorFromBegin(){
         Random rand = new Random();
         myList<Integer> list = new myList<>();
@@ -170,13 +221,33 @@ public class TestList {
     void iteratorFromEnd(){
         Random rand = new Random();
         myList<Integer> list = new myList<>();
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(1, 353);
         for(int i = 0; i < size; i++){
             list.add(rand.nextInt());
         }
         Iterator it = list.iteratorOnTheEnd();
         assertTrue(list.get(list.size()-1).equals(it.next()));
         assertFalse(it.hasNext());
+    }
+
+    @Test
+    void listIterator() {
+        Random rand = new Random();
+        myList<Integer> list = new myList<>();
+        int size = rand.nextInt(1, 353);
+        for(int i = 0; i < size; i++){
+            list.add(rand.nextInt());
+        }
+        ListIterator it = list.listIterator();
+        for(int i = 0; i < list.size(); i++) {
+            assertTrue(it.hasNext());
+            assertEquals(list.get(i), it.next());
+        }
+        assertFalse(it.hasNext());
+        for(int i = list.size()-1; i >= 0; i--) {
+            assertTrue(it.hasPrevious());
+            assertEquals(list.get(i), it.previous());
+        }
     }
 
     @Test

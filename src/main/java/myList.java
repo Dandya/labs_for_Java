@@ -70,6 +70,7 @@ public class myList<Type> implements List {
 
         @Override
         public void remove() {
+            return;
         }
 
         @Override
@@ -79,6 +80,7 @@ public class myList<Type> implements List {
 
         @Override
         public void add(Type type) {
+            return;
         }
     }
 
@@ -95,7 +97,7 @@ public class myList<Type> implements List {
         this.size++;
     }
 
-    public myList(Type... vars) throws NullPointerException {
+    public myList(Type... vars) {
         if( vars == null ) {
             throw new NullPointerException();
         }
@@ -119,7 +121,7 @@ public class myList<Type> implements List {
         return tmpElement;
     }
 
-    public Type get(int index) throws ArrayIndexOutOfBoundsException {
+    public Type get(int index) {
         if (index < 0 || index >= this.size) {
             throw new ArrayIndexOutOfBoundsException(String.format("Element with %d don't exist", index));
         }
@@ -146,7 +148,7 @@ public class myList<Type> implements List {
         this.size++;
     }
 
-    public Type deleteFirstElm() throws UnsupportedOperationException {
+    public Type deleteFirstElm() {
         if (firstElement == null) {
             throw new UnsupportedOperationException("First element don't exist");
         }
@@ -156,7 +158,7 @@ public class myList<Type> implements List {
         return tmp;
     }
 
-    public void deleteByValue(Type value) throws IllegalArgumentException {
+    public void deleteByValue(Type value) {
         boolean isDeleted = false;
         for (int i = 0; i < this.size; i++) {
             if (this.get(i).equals(value)) {
@@ -301,7 +303,7 @@ public class myList<Type> implements List {
     }
 
     @Override
-    public boolean addAll(  Collection c) {
+    public boolean addAll( Collection c) {
         for(Iterator it = c.iterator(); it.hasNext();) {
             push((Type) it.next());
         }
@@ -332,6 +334,40 @@ public class myList<Type> implements List {
         list.lastElement = this.getElm(toIndex-1);
         list.size = toIndex - fromIndex;
         return list;
+    }
+
+    @Override
+    public Object remove(int index) {
+        if(index < 0 || index >= this.size) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        Element<Type> delElm  = this.getElm(index);
+        if(index != 0) {
+            this.getElm(index-1).nextElement = delElm.nextElement;
+        } else {
+            this.firstElement = delElm.nextElement;
+        }
+        this.size--;
+        return delElm.value;
+    }
+
+    @Override
+    public void add(int index, Object element) {
+        if(index < 0 || index > this.size) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        if(index == this.size) {
+            this.push((Type) element);
+            return;
+        }
+        Element<Type> newElm = new Element<>((Type)element);
+        newElm.nextElement = this.getElm(index);
+        if(index > 0) {
+            this.getElm(index-1).nextElement = newElm;
+        } else {
+            this.firstElement = newElm;
+        }
+        this.size++;
     }
 
     public Object clone() {
@@ -367,15 +403,6 @@ public class myList<Type> implements List {
      
     @Override
     public Object[] toArray(  Object[] a) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, Object element) {
-    }
-
-    @Override
-    public Object remove(int index) {
         return null;
     }
 

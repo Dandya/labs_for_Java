@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TestSimpleSort {
 
-    //TODO: add test on empty array and list
     private void sortInBounds(List<Integer> list, int begin, int end) {
         /*
         https://docs.oracle.com/javase/9/docs/api/java/util/List.html#subList-int-int-
@@ -34,7 +33,6 @@ class TestSimpleSort {
         SimpleSort<Integer> Sorts = new SimpleSort<>();
         //---- sort full
         ArrayList<Integer> list = new ArrayList<>();
-        Sorts.BubbleSort(list);
         int size = rand.nextInt(0, 353);
         for(int i = 0; i < size; i++){
             list.add(rand.nextInt());
@@ -737,6 +735,28 @@ class TestSimpleSort {
             SimpleSort.SelectSort(arr, end, begin);
         } catch (IllegalArgumentException e) {
             assertTrue(true);
+        }
+    }
+
+    @Test
+    void EmptyArrayAndList() {
+        List<String> list = new ArrayList<>();
+        String[] arr1 = new String[0];
+        int[] arr2 = new int[0];
+        SimpleSort<String> Sorts = new SimpleSort<>();
+        try {
+            Sorts.BubbleSort(list);
+            Sorts.InputSort(list);
+            Sorts.SelectSort(list);
+            Sorts.BubbleSort(arr1);
+            Sorts.InputSort(arr1);
+            Sorts.SelectSort(arr1);
+            SimpleSort.BubbleSort(arr2);
+            SimpleSort.InputSort(arr2);
+            SimpleSort.SelectSort(arr2);
+            assertTrue(true);
+        } catch (Exception e) {
+            fail();
         }
     }
 }

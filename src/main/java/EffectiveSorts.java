@@ -6,8 +6,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     public EffectiveSorts(){
     }
 
-    private void testOfParameters(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    private void testOfParameters(List<Type> list, int begin, int end) {
         if(list == null) {
             throw new NullPointerException();
         }
@@ -19,8 +18,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    private void testOfParameters(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    private void testOfParameters(Type[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -56,8 +54,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void QuickSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void QuickSort(List<Type> list, int begin, int end) {
         testOfParameters(list, begin, end);
         if(end - begin == 0) {
             return;
@@ -65,8 +62,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(list, begin, end);
     }
 
-    public void QuickSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void QuickSort(List<Type> list) {
         this.QuickSort(list, 0, list.size());
     }
 
@@ -96,8 +92,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void QuickSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void QuickSort(Type[] arr, int begin, int end) {
         testOfParameters(arr, begin, end);
         if(end - begin == 0) {
             return;
@@ -105,8 +100,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public void QuickSort(Type[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void QuickSort(Type[] arr) {
         this.QuickSort(arr, 0, arr.length);
     }
 
@@ -115,14 +109,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? list.get(leftNode).compareTo(list.get(max)) > 0 : false) {
-           int tmp  = max;
            max = leftNode;
-           leftNode = tmp;
         }
         if((rightNode < end)? list.get(rightNode).compareTo(list.get(max)) > 0 : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             list.set(index, list.set(max, list.get(index)));
@@ -130,8 +120,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void HeapSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void HeapSort(List<Type> list, int begin, int end) {
         testOfParameters(list, begin, end);
         if(end - begin == 0) {
             return;
@@ -147,8 +136,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void HeapSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void HeapSort(List<Type> list) {
         this.HeapSort(list, 0, list.size());
     }
 
@@ -157,14 +145,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode].compareTo(arr[max]) > 0 : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode].compareTo(arr[max]) > 0 : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             Type tmp = arr[index];
@@ -174,8 +158,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void HeapSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void HeapSort(Type[] arr, int begin, int end) {
         testOfParameters(arr, begin, end);
         if(end - begin == 0) {
             return;
@@ -193,8 +176,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void HeapSort(Type[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void HeapSort(Type[] arr) {
         this.HeapSort(arr, 0, arr.length);
     }
 
@@ -236,8 +218,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void MergeSort(List<Type> list, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void MergeSort(List<Type> list, int begin, int end) {
         testOfParameters(list, begin, end);
         if(end - begin == 0) {
             return;
@@ -245,8 +226,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(list, begin, end);
     }
 
-    public void MergeSort(List<Type> list) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void MergeSort(List<Type> list) {
         this.MergeSort(list, 0, list.size());
     }
 
@@ -288,8 +268,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public void MergeSort(Type[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void MergeSort(Type[] arr, int begin, int end) {
         testOfParameters(arr, begin, end);
         if(end - begin == 0) {
             return;
@@ -297,8 +276,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public void MergeSort(Type[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public void MergeSort(Type[] arr) {
         this.mergeSortR(arr, 0, arr.length);
     }
 
@@ -329,8 +307,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(byte[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -346,8 +323,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(byte[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(byte[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -356,14 +332,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             byte tmp = arr[index];
@@ -373,8 +345,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(byte[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -400,8 +371,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(byte[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(byte[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -443,8 +413,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(byte[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(byte[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -460,8 +429,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(byte[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(byte[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 
@@ -491,8 +459,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(short[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -508,8 +475,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(short[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(short[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -518,14 +484,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             short tmp = arr[index];
@@ -535,8 +497,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(short[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -562,8 +523,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(short[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(short[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -605,8 +565,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(short[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(short[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -622,8 +581,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(short[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(short[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 
@@ -653,8 +611,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(int[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -670,8 +627,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(int[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(int[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -680,14 +636,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             int tmp = arr[index];
@@ -697,8 +649,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(int[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -724,8 +675,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(int[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(int[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -767,8 +717,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(int[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(int[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -784,8 +733,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(int[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(int[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 
@@ -815,8 +763,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(long[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -832,8 +779,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(long[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(long[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -842,14 +788,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             long tmp = arr[index];
@@ -859,8 +801,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(long[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -886,8 +827,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(long[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(long[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -929,8 +869,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(long[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(long[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -946,8 +885,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(long[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(long[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 
@@ -977,8 +915,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(char[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -994,8 +931,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(char[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(char[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -1004,14 +940,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             char tmp = arr[index];
@@ -1021,8 +953,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(char[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1048,8 +979,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(char[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(char[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -1091,8 +1021,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(char[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(char[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1108,8 +1037,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(char[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(char[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 
@@ -1139,8 +1067,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(float[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1156,8 +1083,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(float[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(float[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -1166,14 +1092,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             float tmp = arr[index];
@@ -1183,8 +1105,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(float[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1210,8 +1131,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(float[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(float[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -1253,8 +1173,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(float[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(float[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1270,8 +1189,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(float[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(float[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 
@@ -1301,8 +1219,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void QuickSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(double[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1318,8 +1235,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         quickSortR(arr, begin, end);
     }
 
-    public static void QuickSort(double[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void QuickSort(double[] arr) {
         QuickSort(arr, 0, arr.length);
     }
 
@@ -1328,14 +1244,10 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         int leftNode = 2*(index - begin) + 1 + begin;
         int rightNode = 2*(index - begin) + 2 + begin;
         if((leftNode < end)? arr[leftNode] > arr[max] : false) {
-            int tmp  = max;
             max = leftNode;
-            leftNode = tmp;
         }
         if((rightNode < end)? arr[rightNode] > arr[max] : false) {
-            int tmp  = max;
             max = rightNode;
-            leftNode = tmp;
         }
         if(max != index) {
             double tmp = arr[index];
@@ -1345,8 +1257,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(double[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1372,8 +1283,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void HeapSort(double[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void HeapSort(double[] arr) {
         HeapSort(arr, 0, arr.length);
     }
 
@@ -1415,8 +1325,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         }
     }
 
-    public static void MergeSort(double[] arr, int begin, int end) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(double[] arr, int begin, int end) {
         if(arr == null) {
             throw new NullPointerException();
         }
@@ -1432,8 +1341,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
         mergeSortR(arr, begin, end);
     }
 
-    public static void MergeSort(double[] arr) throws ArrayIndexOutOfBoundsException,
-            NullPointerException, IllegalArgumentException {
+    public static void MergeSort(double[] arr) {
         MergeSort( arr, 0, arr.length);
     }
 }
