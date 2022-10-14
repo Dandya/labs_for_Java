@@ -2,6 +2,20 @@ import java.util.List;
 
 public class SimpleSort<Type extends Comparable<Type>> {
 
+    /**
+     * BubbleSort
+     *      best: O(n)
+     *      middle: O(n^2)
+     *      bad: O(n^2)
+     * InputSort
+     *      best: O(n)
+     *      middle: O(n^2)
+     *      bad: O(n^2)
+     * SelectSort
+     *      best: O(n^2)
+     *      middle: O(n^2)
+     *      bad: O(n^2)
+     */
     public SimpleSort(){
     }
 

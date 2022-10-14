@@ -29,19 +29,22 @@ class TestEffectiveSort {
 
     @Test
     void QuickSortGeneric() {
+        System.out.println("\nQuickSort");
         Random rand = new Random();
         EffectiveSorts<Integer> Sorts = new EffectiveSorts<>();
         //---- sort full
         ArrayList<Integer> list = new ArrayList<>();
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         for (int i = 0; i < size; i++) {
             list.add(rand.nextInt());
         }
         List<Integer> rightList = (List<Integer>) list.clone();
         Collections.sort(rightList);
         Sorts.QuickSort(list);
+        System.out.println(rightList);
+        System.out.println(list);
         assertTrue(Equals(rightList, list));
-        size = rand.nextInt(0, 353);
+        size = rand.nextInt(0, 20);
         Integer[] arrInt = new Integer[size];
         Integer[] rightArrInt = new Integer[size];
         for (int i = 0; i < size; i++) {
@@ -52,7 +55,7 @@ class TestEffectiveSort {
         Sorts.QuickSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size - 1);
         int end = rand.nextInt(begin, size - 1);
         list = new ArrayList<>();
@@ -62,6 +65,9 @@ class TestEffectiveSort {
         rightList = (List<Integer>) list.clone();
         sortInBounds(rightList, begin, end);
         Sorts.QuickSort(list, begin, end);
+        System.out.println(begin +  " - " + end);
+        System.out.println(rightList);
+        System.out.println(list);
         assertTrue(Equals(rightList, list));
         arrInt = new Integer[size];
         rightArrInt = new Integer[size];
@@ -97,19 +103,22 @@ class TestEffectiveSort {
 
     @Test
     void HeapSortGeneric() {
+        System.out.println("\nHeapSort");
         Random rand = new Random();
         EffectiveSorts<Integer> Sorts = new EffectiveSorts<>();
         //---- sort full
         ArrayList<Integer> list = new ArrayList<>();
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         for (int i = 0; i < size; i++) {
             list.add(rand.nextInt());
         }
         List<Integer> rightList = (List<Integer>) list.clone();
         Collections.sort(rightList);
         Sorts.HeapSort(list);
+        System.out.println(rightList);
+        System.out.println(list);
         assertTrue(Equals(rightList, list));
-        size = rand.nextInt(0, 353);
+        size = rand.nextInt(0, 20);
         Integer[] arrInt = new Integer[size];
         Integer[] rightArrInt = new Integer[size];
         for (int i = 0; i < size; i++) {
@@ -120,7 +129,7 @@ class TestEffectiveSort {
         Sorts.HeapSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size - 1);
         int end = rand.nextInt(begin, size - 1);
         list = new ArrayList<>();
@@ -130,6 +139,9 @@ class TestEffectiveSort {
         rightList = (List<Integer>) list.clone();
         sortInBounds(rightList, begin, end);
         Sorts.HeapSort(list, begin, end);
+        System.out.println(begin +  " - " + end);
+        System.out.println(rightList);
+        System.out.println(list);
         assertTrue(Equals(rightList, list));
         arrInt = new Integer[size];
         rightArrInt = new Integer[size];
@@ -165,19 +177,22 @@ class TestEffectiveSort {
 
     @Test
     void MergeSortGeneric() {
+        System.out.println("\nMergeSort");
         Random rand = new Random();
         EffectiveSorts<Integer> Sorts = new EffectiveSorts<>();
         //---- sort full
         ArrayList<Integer> list = new ArrayList<>();
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         for (int i = 0; i < size; i++) {
             list.add(rand.nextInt());
         }
         List<Integer> rightList = (List<Integer>) list.clone();
         Collections.sort(rightList);
         Sorts.MergeSort(list);
+        System.out.println(rightList);
+        System.out.println(list);
         assertTrue(Equals(rightList, list));
-        size = rand.nextInt(0, 353);
+        size = rand.nextInt(0, 20);
         Integer[] arrInt = new Integer[size];
         Integer[] rightArrInt = new Integer[size];
         for (int i = 0; i < size; i++) {
@@ -188,7 +203,7 @@ class TestEffectiveSort {
         Sorts.MergeSort(arrInt);
         assertArrayEquals(rightArrInt, arrInt);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size - 1);
         int end = rand.nextInt(begin, size - 1);
         list = new ArrayList<>();
@@ -196,8 +211,11 @@ class TestEffectiveSort {
             list.add(rand.nextInt());
         }
         rightList = (List<Integer>) list.clone();
+        System.out.println(begin +  " - " + end);
         sortInBounds(rightList, begin, end);
         Sorts.MergeSort(list, begin, end);
+        System.out.println(rightList);
+        System.out.println(list);
         assertTrue(Equals(rightList, list));
         arrInt = new Integer[size];
         rightArrInt = new Integer[size];
@@ -235,7 +253,7 @@ class TestEffectiveSort {
     void ByteSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         byte[] arr = new byte[size];
         byte[] rightArr, tmp;
         rand.nextBytes(arr);
@@ -257,7 +275,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new byte[size];
@@ -305,7 +323,7 @@ class TestEffectiveSort {
     void ShortSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         short[] arr = new short[size];
         short[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
@@ -328,7 +346,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new short[size];
@@ -378,7 +396,7 @@ class TestEffectiveSort {
     void IntSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         int[] arr = new int[size];
         int[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
@@ -401,7 +419,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new int[size];
@@ -451,7 +469,7 @@ class TestEffectiveSort {
     void LongSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         long[] arr = new long[size];
         long[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
@@ -474,7 +492,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new long[size];
@@ -524,7 +542,7 @@ class TestEffectiveSort {
     void charSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         char[] arr = new char[size];
         char[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
@@ -547,7 +565,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new char[size];
@@ -597,7 +615,7 @@ class TestEffectiveSort {
     void floatSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         float[] arr = new float[size];
         float[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
@@ -620,7 +638,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new float[size];
@@ -670,7 +688,7 @@ class TestEffectiveSort {
     void doubleSort(){
         Random rand = new Random();
         //---- sort full
-        int size = rand.nextInt(0, 353);
+        int size = rand.nextInt(0, 20);
         double[] arr = new double[size];
         double[] rightArr, tmp;
         for(int i = 0; i < size; i++) {
@@ -693,7 +711,7 @@ class TestEffectiveSort {
         EffectiveSorts.MergeSort(arr);
         assertArrayEquals(rightArr, arr);
         //---- sort with bounds
-        size = rand.nextInt(2, 353);
+        size = rand.nextInt(2, 20);
         int begin = rand.nextInt(0, size-1);
         int end = rand.nextInt(begin, size-1);
         arr = new double[size];

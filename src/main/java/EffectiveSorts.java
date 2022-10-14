@@ -3,6 +3,20 @@ import java.util.List;
 
 public class EffectiveSorts<Type extends Comparable<Type>> {
 
+    /**
+     * QuickSort
+     *      best: O(n)
+     *      middle: O(nlog(n))
+     *      bad: O(n^2)
+     * HeapSort
+     *      best: O(nlog(n))
+     *      middle: O(nlog(n))
+     *      bad: O(nlog(n))
+     * MergeSort
+     *      best: O(nlog(n))
+     *      middle: O(nlog(n))
+     *      bad: O(nlog(n))
+     */
     public EffectiveSorts(){
     }
 
@@ -181,7 +195,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private void mergeSortR(List<Type> listSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -231,7 +245,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private void mergeSortR(Object[] arrSrc, int begin, int end) throws ClassCastException {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -376,7 +390,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(byte[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -528,7 +542,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(short[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -680,7 +694,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(int[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -832,7 +846,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(long[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -984,7 +998,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(char[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -1136,7 +1150,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(float[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;
@@ -1288,7 +1302,7 @@ public class EffectiveSorts<Type extends Comparable<Type>> {
     }
 
     private static void mergeSortR(double[] arrSrc, int begin, int end) {
-        if(end - begin == 1) {
+        if(end - begin <= 1) {
             return;
         }
         int mid = (end - begin)/2 + begin;

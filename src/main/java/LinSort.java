@@ -1,9 +1,22 @@
-import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.*;
 
 public class LinSort {
 
+    /**
+     * LSDSort
+     *      best: O(n)
+     *      middle: O(n*max_radix)
+     *      bad: O(n*max_radix)
+     * MDSSort
+     *      best: O(n)
+     *      middle: O(n*max_radix)
+     *      bad: O(n*max_radix)
+     * CountSort
+     *      best: O(n)
+     *      middle: O(n)
+     *      bad: O(n)
+     */
     public LinSort() {
     }
 
